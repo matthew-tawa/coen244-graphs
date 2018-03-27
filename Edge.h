@@ -40,8 +40,8 @@ public:
 	//
 
 	// operators
-	bool operator==(const Edge& right);
-	bool operator!=(const Edge& right);
+	bool operator==(const Edge& right) const;
+	bool operator!=(const Edge& right) const;
 	//
 
 private:

@@ -12,13 +12,10 @@ class Graph {
 public:
 
 	Graph() {}
-	virtual ~Graph();
+	virtual ~Graph() {}
 
 	// add a vertex
 	virtual bool addVertex(Vertex& v) = 0;
-
-	// BONUS: ADD AN ARRAY OF VERTECIES
-	virtual bool addVertices(Vertex* vArray) = 0;
 
 	// remove a vertex, any connected edges are removed
 	virtual bool removeVertex(Vertex& v) = 0;
@@ -27,19 +24,19 @@ public:
 	virtual bool addEdge(Edge& e) = 0;
 
 	// remove an edge
-	virtual bool remove(Edge& e) = 0;
+	virtual bool removeEdge(Edge& e) = 0;
 
 	// returns true if the vertex exists on the graph, false otherwise
-	virtual bool searchVertex(const Vertex& v) = 0;
+	virtual bool searchVertex(const Vertex& v) const = 0;
 
 	// returns true if the edge exists on the graph, false otherwise
-	virtual bool searchEdge(const Edge& e) = 0;
+	virtual bool searchEdge(const Edge& e) const = 0;
 
 	// displays the path that contains the vertex
-	virtual void display(Vertex& v) const = 0;
+	virtual void display(const Vertex& v) const = 0;
 
 	// displays the path that contains the edge
-	virtual void display(Edge& e) const = 0;
+	virtual void display(const Edge& e) const = 0;
 
 	// displays the whole graph
 	virtual void display() const = 0;

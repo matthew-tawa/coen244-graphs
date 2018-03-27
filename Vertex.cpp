@@ -11,29 +11,59 @@ int Vertex::getVal() const {
 	return val;
 }
 
+int Vertex::getIn(int pos) const {
+	return in[pos];
+}
+
+int Vertex::getOut(int pos) const {
+	return out[pos];
+}
+
+int Vertex::getInSize() const {
+	return in.size();
+}
+
+int Vertex::getOutSize() const {
+	return out.size();
+}
+
 void Vertex::setVal(int value) {
 	val = value;
 }
 
 void Vertex::addIn(int newin) {
+	bool inserted = false;
+
 	for (size_t i = 0; i < in.size(); i++) {
-		if (newin < in[i]) {	// checking for the correct place to put the new id so that they remain in increasing order
+		if (newin <= in[i]) {	// checking for the correct place to put the new id so that they remain in increasing order
 			vector<int>::iterator it;
 			it = in.begin() + i;	// creating a vector iterator at the correct location
 			in.insert(it,newin,1);	// inserting the new id
-			return;
+			inserted = true;
+			break;
 		}
+	}
+
+	if (!inserted) {
+		in.push_back(newin);
 	}
 }
 
 void Vertex::addOut(int newout) {
-	for (size_t i = 0; i < out.size(); i++) {	// iterating through the outogin edges
-		if (newout < out[i]) {	// checking for the correct place to put the new id so that they remain in increasing order
+	bool inserted = false;
+
+	for (size_t i = 0; i < out.size(); i++) {	// iterating through the outgoing edges
+		if (newout <= out[i]) {	// checking for the correct place to put the new id so that they remain in increasing order
 			vector<int>::iterator it;
 			it = out.begin() + i;	// creating a vector iterator at the correct location
 			out.insert(it,newout,1);	// inserting the new id
-			return;
+			inserted = true;
+			break;
 		}
+	}
+
+	if (!inserted) {
+		out.push_back(newout);
 	}
 }
 
@@ -59,32 +89,12 @@ void Vertex::removeOut(int removeout) {
 	}
 }
 
-bool Vertex::operator==(const Vertex& v) {
-	if (val == v.val) {	// if they have the same value, continue
-		if (out.size() == v.out.size()) {	// if they have the same number of outgoing edges, continue
-			if (in.size() == v.in.size()) {	// if they have the same number of incoming edges, continue
-
-				for (size_t i = 0; i < out.size(); i++) {
-					if (out[i] != v.out[i]) {	// since the 'out' array is ordered, if two positions are not the same, the vertices are not the same
-						return false;
-					}
-				}
-
-				for (size_t i = 0; i < in.size(); i++) {
-					if (in[i] != v.in[i]) {	// since the 'in' array is ordered, if the positions are not the same, the vertices are not the same
-						return false;
-					}
-				}
-
-				return true;
-			}
-		}
-	}
-	return false;
+bool Vertex::operator==(const Vertex& right) const {
+	return id == right.id;
 }
 
-bool Vertex::operator!=(const Vertex& v) {
-	return !(*this == v);
+bool Vertex::operator!=(const Vertex& right) const {
+	return !(*this == right);
 }
 
 

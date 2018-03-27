@@ -24,11 +24,16 @@ public:
 		id = lastid;
 		lastid++;
 	}
+	Vertex(const Vertex& v) : id(v.id), val(v.val), out(v.out), in(v.in) {}
 	//
 
 	// get functions
 	int getID() const;
 	int getVal() const;
+	int getIn(int pos) const;
+	int getOut(int pos) const;
+	int getInSize() const;
+	int getOutSize() const;
 	//
 
 	// set functions
@@ -43,8 +48,8 @@ public:
 	//
 
 	// operators
-	bool operator==(const Vertex& v);
-	bool operator!=(const Vertex& v);
+	bool operator==(const Vertex& right) const;
+	bool operator!=(const Vertex& right) const;
 	//
 
 

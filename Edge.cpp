@@ -31,17 +31,10 @@ void Edge::setEnd(Vertex* newend) {
 	end = newend;
 }
 
-bool Edge::operator==(const Edge& right) {
-	if (weight == right.weight) {
-		if (start == right.start) {
-			if (end == right.end) {
-				return true;
-			}
-		}
-	}
-	return false;
+bool Edge::operator==(const Edge& right) const {
+	return id == right.id;
 }
 
-bool Edge::operator!=(const Edge& right) {
+bool Edge::operator!=(const Edge& right) const {
 	return !(*this == right);
 }
